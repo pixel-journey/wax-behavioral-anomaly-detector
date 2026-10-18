@@ -1,0 +1,33 @@
+blueprint:
+  id: wax-behavioral-anomaly-detector
+  name: Behavioral Anomaly Detector
+  tier: forensics-behavioral
+  category: analytics
+  status: promoted
+  version: "0.5.0"
+  last_refined: "2026-10-18"
+
+metadata:
+  description: |
+    Timing-regularity anomaly score from action intervals. Educational soft signal.
+  related_blueprints:
+    - wax-organic-activity-fingerprinter
+    - wax-temporal-behavior-heatmap
+    - wax-account-sybil-distance-scorer
+
+invariants:
+  - Pure given timestamps
+  - No random scores
+  - Soft signal only
+
+features:
+  implemented:
+    - detectAnomalies, interval stats, flags, demo page
+
+machine_instructions:
+  - Use examples/engines.ts
+  - Feed Hyperion timestamps at app edge
+
+technical_requirements:
+  framework: Next.js + TypeScript
+  styling: Tailwind CSS
