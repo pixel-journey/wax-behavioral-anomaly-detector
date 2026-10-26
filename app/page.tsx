@@ -14,6 +14,7 @@ type Mode = 'live' | 'scripted' | 'organic';
 export default function BehavioralAnomalyDetector() {
   const [mode, setMode] = useState<Mode>('live');
   const [account, setAccount] = useState('eosio');
+  const [origin, setOrigin] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [liveResult, setLiveResult] = useState<AnomalyResult | null>(null);
@@ -33,7 +34,10 @@ export default function BehavioralAnomalyDetector() {
     setMeta(null);
     try {
       const { timestamps, source, rawCount } =
-        await fetchAccountActionTimestamps(account, { limit: 100 });
+        await fetchAccountActionTimestamps(account, {
+          limit: 100,
+          hyperionBase: origin.trim() || undefined,
+        });
       if (timestamps.length < 2) {
         setError('Not enough actions returned to score intervals.');
         setLiveResult(null);
@@ -47,7 +51,7 @@ export default function BehavioralAnomalyDetector() {
     } finally {
       setLoading(false);
     }
-  }, [account]);
+  }, [account, origin]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white p-6">
@@ -96,6 +100,12 @@ export default function BehavioralAnomalyDetector() {
               onChange={(e) => setAccount(e.target.value)}
               className="flex-1 bg-black/60 border border-white/10 px-4 py-3 rounded-xl font-mono text-sm"
               placeholder="WAX account"
+            />
+            <input
+              value={origin}
+              onChange={(e) => setOrigin(e.target.value)}
+              className="flex-1 bg-black/60 border border-white/10 px-4 py-3 rounded-xl font-mono text-sm"
+              placeholder="Custom history origin (optional)"
             />
             <button
               type="button"
