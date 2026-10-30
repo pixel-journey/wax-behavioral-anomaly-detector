@@ -1,6 +1,13 @@
-# REFINEMENT_COMPLETION_REPORT.md
+# Behavioral anomaly detector
 
-**Date:** 2026-10-18  
-**Status:** ✅ Promoted from README-only concept
+**Updated:** 2026-10-31
 
-Added pure engines, demos, app page, honest status. First README-only promotion in this wave.
+| Scope | Notes |
+|------|-------|
+| Engine | intervals → anomaly score |
+| Live | Hyperion soft sample |
+| Education | myths, POLICY, MD export, vitest |
+
+```bash
+npm install && npm test
+```
