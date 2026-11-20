@@ -7,7 +7,7 @@
 
 | Level | After this file |
 | --- | --- |
-| Beginner | Run the scripted 60 s demo and see anomaly score ≥ 60 with level elevated or high |
+| Beginner | Run the scripted 60 s demo and get score `98` (`high`), and the organic demo at `56` (`elevated`) |
 | Intermediate | Explain why the organic demo scores lower, and why small samples return 25 |
 | Masterclass | Say why a high anomaly score is still only a soft signal |
 
@@ -17,14 +17,19 @@
 
 ```ts
 const scripted = detectAnomalies(demoScriptedTimestamps(28));
-scripted.anomalyScore >= 60
-// level is "elevated" or "high"
+scripted.anomalyScore === 98
+scripted.level === "high"
+scripted.flags // ["near-zero-variance", "high-anomaly"]
 
 const organic = detectAnomalies(demoOrganicTimestamps(28));
-organic.anomalyScore < scripted.anomalyScore
+organic.anomalyScore === 56
+organic.level === "elevated"
+organic.flags // ["neutral"]
 ```
 
-The scripted demo adds a fixed 60 s every step. The organic demo adds jittered gaps. The test does **not** lock the scripted score as a single integer. It locks `≥ 60`, and that the organic demo scores lower.
+The scripted demo adds a fixed 60 s every step. Standard deviation is 0, so the formula adds 20 and then the cap `Math.min(98, score)` holds the result at **98**. A perfectly regular series cannot score 100. The organic demo scores **56**, which is `elevated` (the band starts at 45) and its only flag is `neutral`.
+
+`high` starts at 70. The old test allowed `elevated` or `high` for the scripted demo. It is `high`.
 
 ## History hosts this file will build, and will not call
 
@@ -57,7 +62,7 @@ These URLs are built and not requested.
 npm test
 ```
 
-1. Scripted demo anomalyScore ≥ 60 and level is elevated or high.
+1. Scripted demo anomalyScore is `98` and level is `high`. Organic is `56` and `elevated`.
 2. Organic demo anomalyScore is lower than the scripted demo.
 
 ---

@@ -13,11 +13,10 @@ The course is [EDUCATION.md](EDUCATION.md) (beginner, intermediate, masterclass)
 
 | Rule | Result |
 | --- | --- |
-| scripted 60 s demo (28) | anomalyScore ≥ 60, level elevated or high |
-| organic demo | lower score than scripted |
-| sampleSize < 5 or intervals < 4 | score forced to 25 |
-| stdDev < 2 and count ≥ 8 | +20 |
-| methodologyNote | rises on regular intervals; soft signal only |
+| scripted 60 s demo (28) | anomalyScore `98`, level `high`, flags `near-zero-variance` and `high-anomaly` |
+| organic demo (28) | anomalyScore `56`, level `elevated`, flag `neutral` |
+| sample shorter than 5 | score `25` |
+| perfectly regular series | capped at `98`. The +20 for near-zero std-dev cannot push it to 100. |
 
 ## What is in the repo
 
