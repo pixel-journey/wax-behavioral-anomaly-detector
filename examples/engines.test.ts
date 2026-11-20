@@ -20,4 +20,8 @@ describe("detectAnomalies", () => {
         detectAnomalies(demoScriptedTimestamps(28)).anomalyScore
       );
     });
+
+  it("forces a sample shorter than 5 to 25", () => {
+    expect(detectAnomalies([1_000, 1_060, 1_120]).anomalyScore).toBe(25);
+  });
 });

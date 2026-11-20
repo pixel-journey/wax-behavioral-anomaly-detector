@@ -1,7 +1,7 @@
 # Low interval variance raises a soft anomaly score
 
 > **Trust:** `educational-reference`  
-> **Catalog:** [wax-ecosystem-blueprint-catalog](https://github.com/pixel-journey/wax-ecosystem-blueprint-catalog)
+> **Catalog:** `wax-ecosystem-blueprint-catalog` (private index; not this public course)
 
 **One-sentence goal:** Teach a pure anomaly score that rises when inter-arrival intervals are highly regular (low CV / near-zero std-dev), with scripted versus organic demos — without claiming a bot verdict.
 

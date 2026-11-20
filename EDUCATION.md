@@ -24,15 +24,31 @@ const organic = detectAnomalies(demoOrganicTimestamps(28));
 organic.anomalyScore < scripted.anomalyScore
 ```
 
-The scripted demo adds a fixed 60 s every step. The organic demo adds jittered gaps.
+The scripted demo adds a fixed 60 s every step. The organic demo adds jittered gaps. The test does **not** lock the scripted score as a single integer. It locks `≥ 60`, and that the organic demo scores lower.
 
-### Words
+## History hosts this file will build, and will not call
+
+`examples/live/origins.ts` was a `node:test` file, so `vitest` ignored it and `npm test` failed with "no test suite". It is a vitest file now.
+
+| Call | Locked result |
+| --- | --- |
+| `parseHttpsOrigin("https://wax.eosphere.io")` | ok |
+| the same origin plus `/v2` | not ok. A path is not an origin. |
+| `http://` | not ok |
+| `actionsUrl(..., "EOSIO", 1)` | `.../v2/history/get_actions?account=eosio&limit=1&sort=desc`. The name is lowercased. |
+| limit `201` | not ok. The cap is 200. |
+| `HISTORY_ORIGINS[0]` | `https://wax.eosphere.io`. `wax.eosrio.io` is not in the list. |
+
+These URLs are built and not requested.
+
+## Words
+
 
 | Word | Meaning here |
 | --- | --- |
 | Anomaly score | 5–98. Higher when intervals are regular (low CV) |
 | Level | `high` (≥70), `elevated` (≥45), `normal` otherwise |
-| Small sample | sampleSize < 5 or intervals < 4 → score forced to 25 |
+| Small sample | sampleSize < 5 or intervals < 4 → score forced to 25. `detectAnomalies([1000, 1060, 1120])` is locked at `25`. |
 | Near-zero | stdDev < 2 and count ≥ 8 adds +20 |
 
 ### Predict, then run
