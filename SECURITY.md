@@ -33,5 +33,7 @@ No network on the score path. Soft teaching signal only.
 | --- | --- |
 | [organic fingerprinter](https://github.com/pixel-journey/wax-organic-activity-fingerprinter) | HCI 53 organic / 5 mechanical |
 | [temporal heatmap](https://github.com/pixel-journey/wax-temporal-behavior-heatmap) | Hour-of-day density |
+| [churn predictor](https://github.com/pixel-journey/wax-player-churn-predictor) | Weighted churn score |
+| [velocity scatter](https://github.com/pixel-journey/wax-collection-velocity-scatter-plot) | hold/velocity quadrants |
 
 [docs.wax.io](https://docs.wax.io/).
