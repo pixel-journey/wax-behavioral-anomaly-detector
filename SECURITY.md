@@ -15,13 +15,23 @@
 | Live history | URL builders are unsent; unit demos are local |
 | Enforcement | Soft signal; corroborate before any ban |
 | False positives | Regular humans and jittered bots both exist |
+| Sybil clusters | Not detected here |
 
 ## Attack angles
 
 1. Auto-ban on score ≥70.  
-2. Ignoring small-sample early return.  
-3. Claiming the scripted demo proves a specific account is a bot.
+2. Ignoring small-sample early return (score 25).  
+3. Claiming the scripted demo proves a specific account is a bot.  
+4. Treating elevated organic (56) as high-confidence automation.  
+5. Hiding a network fetch inside the pure score path.
 
 ## Honesty limits
 
-No network on the score path. [docs.wax.io](https://docs.wax.io/) · [organic fingerprinter](https://github.com/pixel-journey/wax-organic-activity-fingerprinter).
+No network on the score path. Soft teaching signal only.
+
+| Sibling | Distinction |
+| --- | --- |
+| [organic fingerprinter](https://github.com/pixel-journey/wax-organic-activity-fingerprinter) | HCI 53 organic / 5 mechanical |
+| [temporal heatmap](https://github.com/pixel-journey/wax-temporal-behavior-heatmap) | Hour-of-day density |
+
+[docs.wax.io](https://docs.wax.io/).
